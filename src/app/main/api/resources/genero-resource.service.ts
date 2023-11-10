@@ -5,7 +5,7 @@ import { IGenero } from '../models/i-genero';
 
 @Injectable()
 @ResourceParams({
-  pathPrefix: `${environment.apiUrl}/generos`
+  pathPrefix: `${environment.apiUrl}/api/personas/generos`
 })
 export class GeneroResourceService extends Resource{
 

@@ -4,7 +4,7 @@ export interface IPersona {
     apellido: string;
     clave: string;
     correo: string;
-    codGenero: string;
+    nomGenero: string;
     fechaNacimiento: string;
-    codNacionalidad: string;
+    nomNacionalidad: string;
 }

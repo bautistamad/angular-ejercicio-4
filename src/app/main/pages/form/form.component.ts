@@ -28,10 +28,10 @@ export class FormComponent {
   showInfo: boolean = false;
 
   constructor(private _fb: FormBuilder,
-    private _nacionalidadService: NacionalidadResourceService,
-    private _generoService: GeneroResourceService,
-    private _hobbyService: HobbyResourceService,
-    private _equipoService: EquipoResourceService,
+    // private _nacionalidadService: NacionalidadResourceService,
+    // private _generoService: GeneroResourceService,
+    // private _hobbyService: HobbyResourceService,
+    // private _equipoService: EquipoResourceService,
     private _personaService: PersonaResourceService,
     private _route: ActivatedRoute,
     //fix
@@ -43,6 +43,14 @@ export class FormComponent {
     // this.nacionalidades = [];
     this._route.snapshot.params['id']
     console.log(    this._route.snapshot.params['id'] );
+
+    // this._route.data.subscribe((data) => {
+    //   // this.generos = data["generos"]
+    //   // this.equipos = data["equipos"],
+    //   // this.actividades = data["actividades"],
+    //   // this.nacionalidades = data["nacionalidades"]
+    // })
+
     this.loadData();
     this.initForm();
   }
@@ -65,63 +73,76 @@ export class FormComponent {
     });
   }
 
-  listarNacionalidades(): void {
-    this._nacionalidadService.get().subscribe({
-      next: (nacionalidades: INacionalidad[]) => {
-        this.nacionalidades = nacionalidades
-        // console.log(JSON.stringify(this.nacionalidades));
-      },
-      error: (err) => {
-        throw err;
-      }
-    })
-  }
+  // listarNacionalidades(): void {
+  //   this._nacionalidadService.get().subscribe({
+  //     next: (nacionalidades: INacionalidad[]) => {
+  //       this.nacionalidades = nacionalidades
+  //       // console.log(JSON.stringify(this.nacionalidades));
+  //     },
+  //     error: (err) => {
+  //       throw err;
+  //     }
+  //   })
+  // }
 
-  listarGeneros(): void {
-    this._generoService.get().subscribe({
-      next: (generos: IGenero[]) => {
-        this.generos = generos
-        // console.log(JSON.stringify(this.generos));
-      },
-      error: (err) => {
-        throw err;
-      }
-    })
-  }
+  // listarGeneros(): void {
+  //   this._generoService.get().subscribe({
+  //     next: (generos: IGenero[]) => {
+  //       this.generos = generos
+  //       // console.log(JSON.stringify(this.generos));
+  //     },
+  //     error: (err) => {
+  //       throw err;
+  //     }
+  //   })
+  // }
 
-  listarHobbies(): void {
-    this._hobbyService.get().subscribe({
-      next: (hobbies: IHobby[]) => {
-        this.actividades = hobbies
-        // console.log(JSON.stringify(this.hobbies));
-      },
-      error: (err) => {
-        throw err;
-      }
-    })
-  }
+  // listarHobbies(): void {
+  //   this._hobbyService.get().subscribe({
+  //     next: (hobbies: IHobby[]) => {
+  //       this.actividades = hobbies
+  //       // console.log(JSON.stringify(this.hobbies));
+  //     },
+  //     error: (err) => {
+  //       throw err;
+  //     }
+  //   })
+  // }
 
 
-  listarEquipos(): void {
-    this._equipoService.get().subscribe({
-      next: (equipos: IEquipo[]) => {
-        this.equipos = equipos
-        // console.log(JSON.stringify(this.equipos));
-      },
-      error: (err) => {
-        throw err;
-      }
-    })
-  }
+  // listarEquipos(): void {
+  //   this._equipoService.get().subscribe({
+  //     next: (equipos: IEquipo[]) => {
+  //       this.equipos = equipos
+  //       // console.log(JSON.stringify(this.equipos));
+  //     },
+  //     error: (err) => {
+  //       throw err;
+  //     }
+  //   })
+  // }
+
+listarDatosResolver(): void {
+  this._route.data.subscribe((data) => {
+    this.generos = data["generos"],
+    this.equipos = data["equipos"],
+    this.actividades = data["actividades"],
+    this.nacionalidades = data["nacionalidades"]
+  })
+}
+
 
 
   private loadData() {
 
-    this.listarNacionalidades();
-    this.listarGeneros();
-    this.listarHobbies();
-    this.listarEquipos();
+
+    // this.listarNacionalidades();
+    // this.listarGeneros();
+    // this.listarHobbies();
+    // this.listarEquipos();
+    this.listarDatosResolver();
   }
+
 
   showData(): void {
     this.submitted = true;
@@ -156,7 +177,7 @@ export class FormComponent {
           correo: persona[0].correo,
           clave: persona[0].clave, // Asumiendo que quieres mostrar la clave en el formulario
           confirmar_clave: [''],
-          codGenero: [this.generos.find(g => g.codigo == persona[0].codGenero)],
+          codGenero: [this.generos.find(g => g.nombre == persona[0].nomGenero)],
           fechaNacimiento: persona[0].fechaNacimiento,
           // codNacionalidad: [this.nacionalidades.find(g => g.codigo == persona[0].codigo)],
           codNacionalidad: [""],

@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 @ResourceParams({
-  pathPrefix: `${environment.apiUrl}/nacionalidades`
+  pathPrefix: `${environment.apiUrl}/api/personas/nacionalidades`
 })
 export class NacionalidadResourceService extends Resource {
 

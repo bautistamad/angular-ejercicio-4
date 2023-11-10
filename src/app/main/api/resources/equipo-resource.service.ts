@@ -5,7 +5,7 @@ import { IEquipo } from '../models/i-equipo';
 
 @Injectable()
 @ResourceParams({
-  pathPrefix: `${environment.apiUrl}/equipos`
+  pathPrefix: `${environment.apiUrl}/api/personas/equipos`
 })
 export class EquipoResourceService extends Resource{
 
