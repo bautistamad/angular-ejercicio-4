@@ -12,29 +12,29 @@ export class PersonaResourceService extends Resource {
 
   constructor(handler?: ResourceHandler) {
     super(handler);
-   }
-   @ResourceAction({
+  }
+  @ResourceAction({
     path: '/listado',
     method: ResourceRequestMethod.Get
-   })
-   get!: IResourceMethodObservable<{},IPersona[]>;
+  })
+  get!: IResourceMethodObservable<{}, IPersona[]>;
 
 
-   @ResourceAction({
+  @ResourceAction({
     path: '/{!nro_persona}',
     method: ResourceRequestMethod.Get,
-   })
-   getPersona!: IResourceMethodObservable<{nro_persona?: number},IPersonadata[]>;
+  })
+  getPersona!: IResourceMethodObservable<{ nro_persona?: number }, IPersonadata[]>;
 
-   @ResourceAction({
+  @ResourceAction({
     path: '/persona',
     method: ResourceRequestMethod.Post,
-   })
-   post!: IResourceMethodObservable<{persona: IPersonadata},{}>;
+  })
+  post!: IResourceMethodObservable<{ persona: IPersonadata }, {}>;
 
-   @ResourceAction({
+  @ResourceAction({
     path: '/{!nro_persona}',
     method: ResourceRequestMethod.Delete,
-   })
-   delete!: IResourceMethodObservable<{nro_persona?: number},IPersona[]>;
+  })
+  delete!: IResourceMethodObservable<{ nro_persona?: number }, IPersona[]>;
 }
