@@ -11,7 +11,6 @@ import { CoreModule } from './core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoaderComponent
   ],
   imports: [
     BrowserModule,
