@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoaderComponent } from './core/loader/loader.component';
-import { ResourceModule } from '@ngx-resource/handler-ngx-http';
+import { ResourceModule } from '@ngx-resource/handler-ngx-http'
 import { CoreModule } from './core/core.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './core/interceptors/app-http.interceptor';
