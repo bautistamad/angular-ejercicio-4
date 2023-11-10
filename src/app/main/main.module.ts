@@ -11,8 +11,6 @@ import { ListComponent } from './pages/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainRoutingModule } from './main-routing.module';
 
-
-
 @NgModule({
   declarations: [
     MainComponent,

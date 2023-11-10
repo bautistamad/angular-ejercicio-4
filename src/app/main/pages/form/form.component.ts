@@ -187,7 +187,7 @@ export class FormComponent {
         next: (response) => {
           console.log(response);
           console.log("Insercion exitosa");
-          this.router.navigate(['/main']);
+          // this.router(['/main']);
         },
         error: (error) => {
           console.log(error)
