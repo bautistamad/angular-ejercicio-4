@@ -9,6 +9,7 @@ import { GeneroResourceService } from './api/resources/genero-resource.service';
 import { FormComponent } from './pages/form/form.component';
 import { ListComponent } from './pages/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainRoutingModule } from './main-routing.module';
 
 
 
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MainRoutingModule
   ],
   providers: [
     PersonaResourceService,

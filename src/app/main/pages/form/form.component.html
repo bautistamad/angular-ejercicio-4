@@ -71,8 +71,8 @@
 			<div class="col-12 col-md-2 mb-3">
 				<label for="iGeneroF">G&eacute;nero</label>
 				<div class="form-check" *ngFor="let g of generos">
-					<input type="radio" class="form-check-input" formControlName="codGenero" [value]="g.codGenero" [attr.id]="'iGenero' + g.codGenero">
-					<label class="form-check-label" [attr.for]="'iGenero' + g.codGenero">{{g.nomGenero}}</label>
+					<input type="radio" class="form-check-input" formControlName="codGenero" [value]="g.codigo" [attr.id]="'iGenero' + g.codigo">
+					<label class="form-check-label" [attr.for]="'iGenero' + g.codigo">{{g.nombre}}</label>
 				</div>
 			</div>
 			<div class="col-12 col-md-4 mb-3">
@@ -83,7 +83,7 @@
 				<label for="inacionalidad">Nacionalidad</label>
 				<select id="inacionalidad" formControlName="codNacionalidad" class="form-select" >
 					<option value="">Debe seleccionar una nacionalidad</option>
-					<option [value]="n.codNacionalidad" *ngFor="let n of nacionalidades">{{n.nomNacionalidad}}</option>
+					<option [value]="n.codigo" *ngFor="let n of nacionalidades">{{n.nombre}}</option>
 				</select>
 			</div>
 		</div>
@@ -94,15 +94,15 @@
 			<div class="col-12 col-md-6 mb-3">
 				<label for="iequipo">Equipo Favorito</label>
 				<select id="iequipo" formControlName="equipos" size="5" multiple class="form-select">
-					<option [value]="e.nroEquipo" *ngFor="let e of equipos">{{e.nomEquipo}}</option>
+					<option [value]="e.id" *ngFor="let e of equipos">{{e.nombre}}</option>
 				</select>
 			</div>
 			<div class="col-12 col-md-6 mb-3" formArrayName="actividades">
 				<label>Hobbies</label>
 				<div class="form-check" *ngFor="let h of actividades">
-					<input type="checkbox" class="form-check-input" [value]="h.nroActividad" [attr.id]="'i' + h.nroActividad" (change)="setHobby($event)">
+					<input type="checkbox" class="form-check-input" [value]="h.id" [attr.id]="'i' + h.nombre" (change)="setHobby($event)">
 					<!--  -->
-					<label class="form-check-label" [attr.for]="'i' + h.nroActividad">{{h.nomActividad}}</label>
+					<label class="form-check-label" [attr.for]="'i' + h.id">{{h.nombre}}</label>
 				</div>
 			</div>
 		</div>

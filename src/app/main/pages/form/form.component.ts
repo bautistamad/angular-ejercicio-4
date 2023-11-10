@@ -196,4 +196,15 @@ export class FormComponent {
       })
     }
   }
+
+  setHobby(event: any): void {
+    // console.log(event);
+    if (event.target.checked) {
+      this.actividadesArray.push(new FormControl(Number(event.target.value)));
+    } else {
+      let index = this.actividadesArray.controls.findIndex(h => h.value == event.target.value);
+      if (index >= 0)
+        this.actividadesArray.removeAt(index);
+    }
+  }
 }
