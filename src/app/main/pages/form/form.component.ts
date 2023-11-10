@@ -7,8 +7,7 @@ import { INacionalidad } from '../../api/models/i-nacionalidad';
 import { NacionalidadResourceService } from '../../api/resources/nacionalidad-resource.service';
 import { GeneroResourceService } from '../../api/resources/genero-resource.service';
 import { HobbyResourceService } from '../../api/resources/hobby-resource.service';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from 'express';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EquipoResourceService } from '../../api/resources/equipo-resource.service';
 import { PersonaResourceService } from '../../api/resources/persona-resource.service';
 import { IPersonadata } from '../../api/models/i-personadata';
@@ -187,7 +186,7 @@ export class FormComponent {
         next: (response) => {
           console.log(response);
           console.log("Insercion exitosa");
-          // this.router(['/main']);
+          this.router.navigate(['/main']);
         },
         error: (error) => {
           console.log(error)

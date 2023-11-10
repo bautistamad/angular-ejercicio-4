@@ -1,1 +1,28 @@
-<p>list works!</p>
+<body class="container">
+    <table border="1" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Genero</th>
+                <th>Correo</th>
+                <th>Nacionalidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let persona of personas; let i = index">
+                <td>{{ persona.nroPersona }}</td>
+                <td>{{ persona.apellido }}</td>
+                <td>{{ persona.nombre }}</td>
+                <td>{{ persona.codGenero }}</td>
+                <td>{{ persona.correo }}</td>
+                <td>{{ persona.codNacionalidad }}</td>
+                <td><button class="btn btn-info" (click)="editarPersona(persona.nroPersona)"> Editar </button></td>
+                <td><button class="btn btn-danger" (click)="deletePersona(persona.nroPersona)"> Eliminar </button></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- https://angular.io/guide/router-tutorial -->
+    <button class="btn btn-success" routerLink="formulario">Nuevo</button>
+</body>
