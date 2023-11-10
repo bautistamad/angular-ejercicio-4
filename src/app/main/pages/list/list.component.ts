@@ -25,9 +25,21 @@ export class ListComponent {
     this._route.data.subscribe((data) => {
       this.personas = data["personas"]
     })
-    }
   }
 
+  editarPersona( nro_persona: number ): void {
+    // this._editService.addNumber(nro_persona);
+    this.router.navigate(['/main/formulario', nro_persona]);
+  }
+
+}
+  
+
+  // editarPersona(nro_persona: number): void {
+  //   // this._editService.addNumber(nro_persona);
+  //   // this.router.navigate(['/main/formulario', nro_persona]);
+
+  // }
   // listarPersonas(): void {
   //   this._service.get().subscribe({
   //     next: ( personas:IPersona[] ) => {
@@ -39,11 +51,6 @@ export class ListComponent {
   //   })
   // }
 
-  // editarPersona(nro_persona: number): void {
-  //   // this._editService.addNumber(nro_persona);
-  //   this.router.navigate(['/main/formulario', nro_persona]);
-
-  // }
 
   // deletePersona( nro_persona : number) : void {
   //   this._service.delete({nro_persona}).subscribe({

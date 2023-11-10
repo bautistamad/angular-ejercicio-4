@@ -28,36 +28,16 @@ export class FormComponent {
   showInfo: boolean = false;
 
   constructor(private _fb: FormBuilder,
-    // private _nacionalidadService: NacionalidadResourceService,
-    // private _generoService: GeneroResourceService,
-    // private _hobbyService: HobbyResourceService,
-    // private _equipoService: EquipoResourceService,
     private _personaService: PersonaResourceService,
     private _route: ActivatedRoute,
-    //fix
     private router: Router) {
   }
 
   ngOnInit(): void {
-    // Consultar porque sin esto no funciona
-    // this.nacionalidades = [];
-    this._route.snapshot.params['id']
-    console.log(    this._route.snapshot.params['id'] );
-
-    // this._route.data.subscribe((data) => {
-    //   // this.generos = data["generos"]
-    //   // this.equipos = data["equipos"],
-    //   // this.actividades = data["actividades"],
-    //   // this.nacionalidades = data["nacionalidades"]
-    // })
-
     this.loadData();
     this.initForm();
   }
   private initForm(): void {
-    // if ( this._route.snapshot.params['id'] != undefined ) {
-    //   this.loadPersona(this._route.snapshot.params['id'])
-    // }
     this.form = this._fb.group({
       apellido: new FormControl('', [Validators.required]),
       nombre: new FormControl('', [Validators.required]),
@@ -73,62 +53,31 @@ export class FormComponent {
     });
   }
 
-  // listarNacionalidades(): void {
-  //   this._nacionalidadService.get().subscribe({
-  //     next: (nacionalidades: INacionalidad[]) => {
-  //       this.nacionalidades = nacionalidades
-  //       // console.log(JSON.stringify(this.nacionalidades));
-  //     },
-  //     error: (err) => {
-  //       throw err;
-  //     }
-  //   })
-  // }
-
-  // listarGeneros(): void {
-  //   this._generoService.get().subscribe({
-  //     next: (generos: IGenero[]) => {
-  //       this.generos = generos
-  //       // console.log(JSON.stringify(this.generos));
-  //     },
-  //     error: (err) => {
-  //       throw err;
-  //     }
-  //   })
-  // }
-
-  // listarHobbies(): void {
-  //   this._hobbyService.get().subscribe({
-  //     next: (hobbies: IHobby[]) => {
-  //       this.actividades = hobbies
-  //       // console.log(JSON.stringify(this.hobbies));
-  //     },
-  //     error: (err) => {
-  //       throw err;
-  //     }
-  //   })
-  // }
-
-
-  // listarEquipos(): void {
-  //   this._equipoService.get().subscribe({
-  //     next: (equipos: IEquipo[]) => {
-  //       this.equipos = equipos
-  //       // console.log(JSON.stringify(this.equipos));
-  //     },
-  //     error: (err) => {
-  //       throw err;
-  //     }
-  //   })
-  // }
-
 listarDatosResolver(): void {
-  this._route.data.subscribe((data) => {
-    this.generos = data["generos"],
-    this.equipos = data["equipos"],
-    this.actividades = data["actividades"],
-    this.nacionalidades = data["nacionalidades"]
-  })
+  // this._route.data.subscribe((data) => {
+  //   this.generos = data["generos"],
+  //   this.equipos = data["equipos"],
+  //   this.actividades = data["actividades"],
+  //   this.nacionalidades = data["nacionalidades"]
+  // })
+
+  console.log(this._route.snapshot.params['nro_persona']);
+
+  if ( this._route.snapshot.params['nro_persona'] != 0 ){
+    this._route.data.subscribe((data) => {
+      this.generos = data["generos"],
+      this.equipos = data["equipos"],
+      this.actividades = data["actividades"],
+      this.nacionalidades = data["nacionalidades"]
+    })
+  } else{ 
+    this._route.data.subscribe((data) => {
+      this.generos = data["generos"],
+      this.equipos = data["equipos"],
+      this.actividades = data["actividades"],
+      this.nacionalidades = data["nacionalidades"]
+    })
+  }
 }
 
 
@@ -168,32 +117,32 @@ listarDatosResolver(): void {
 
   private loadPersona(nroPersona: number): void {
     // Nota que estamos pasando un objeto con la propiedad `nro_persona`
-    this._personaService.getPersona({ nro_persona: nroPersona }).subscribe({
-      next: (persona: IPersonadata[]) => {
-        console.log(JSON.stringify(persona));
-        this.form.setValue({
-          apellido: persona[0].apellido,
-          nombre: persona[0].nombre,
-          correo: persona[0].correo,
-          clave: persona[0].clave, // Asumiendo que quieres mostrar la clave en el formulario
-          confirmar_clave: [''],
-          codGenero: [this.generos.find(g => g.nombre == persona[0].nomGenero)],
-          fechaNacimiento: persona[0].fechaNacimiento,
-          // codNacionalidad: [this.nacionalidades.find(g => g.codigo == persona[0].codigo)],
-          codNacionalidad: [""],
-          // equipos: [this.equipos.find(g => g.id == persona[0].equipos[0])],
-          equipos: [""],
-          // actividades: [this.actividades.find(g => g.id == persona[0].actividades[0])],
-          actividades: [""],
-          otrasActividades: ['']
-        });
+    // this._personaService.getPersona({ nro_persona: nroPersona }).subscribe({
+    //   next: (persona: IPersonadata[]) => {
+    //     console.log(JSON.stringify(persona));
+    //     this.form.setValue({
+    //       apellido: persona[0].apellido,
+    //       nombre: persona[0].nombre,
+    //       correo: persona[0].correo,
+    //       clave: persona[0].clave, // Asumiendo que quieres mostrar la clave en el formulario
+    //       confirmar_clave: [''],
+    //       codGenero: [this.generos.find(g => g.nombre == persona[0].nomGenero)],
+    //       fechaNacimiento: persona[0].fechaNacimiento,
+    //       // codNacionalidad: [this.nacionalidades.find(g => g.codigo == persona[0].codigo)],
+    //       codNacionalidad: [""],
+    //       // equipos: [this.equipos.find(g => g.id == persona[0].equipos[0])],
+    //       equipos: [""],
+    //       // actividades: [this.actividades.find(g => g.id == persona[0].actividades[0])],
+    //       actividades: [""],
+    //       otrasActividades: ['']
+    //     });
 
-      },
-      error: (err) => {
-        // Aquí puedes manejar el error
-        console.error('Error al cargar la persona:', err);
-      }
-    });
+    //   },
+    //   error: (err) => {
+    //     // Aquí puedes manejar el error
+    //     console.error('Error al cargar la persona:', err);
+    //   }
+    // });
   }
 
   agregarPersona(): void {
