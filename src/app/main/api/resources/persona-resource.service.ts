@@ -24,7 +24,7 @@ export class PersonaResourceService extends Resource {
     path: '/datos/{!nro_persona}',
     method: ResourceRequestMethod.Get,
   })
-  getPersona!: IResourceMethodObservable<{ nro_persona?: number }, IPersonadata[]>;
+  getPersona!: IResourceMethodObservable<{ nro_persona?: string }, IPersonadata[]>;
 
   @ResourceAction({
     path: '/persona',

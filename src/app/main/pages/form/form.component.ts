@@ -69,6 +69,7 @@ listarDatosResolver(): void {
       this.equipos = data["equipos"],
       this.actividades = data["actividades"],
       this.nacionalidades = data["nacionalidades"]
+      console.log(data["persona"])
     })
   } else{ 
     this._route.data.subscribe((data) => {

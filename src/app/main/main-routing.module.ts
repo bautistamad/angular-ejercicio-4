@@ -14,8 +14,8 @@ import { equipoResolver } from './resolvers/equipo.resolver';
 const routes: Routes = [
   { path: '', component: MainComponent, children: [
     { path: '', component: ListComponent, resolve: {personas: personasResolver}},
-    { path: 'formulario', component: FormComponent, resolve: {generos: generoResolver, actividades: hobbyResolver, nacionalidades: nacionalidadResolver, equipos: equipoResolver, persona: personaResolver}},
-    {path: 'formulario/:nro_persona', component: FormComponent}
+    { path: 'formulario', component: FormComponent, resolve: {generos: generoResolver, actividades: hobbyResolver, nacionalidades: nacionalidadResolver, equipos: equipoResolver}},
+    {path: 'formulario/:nro_persona', component: FormComponent, resolve: {generos: generoResolver, actividades: hobbyResolver, nacionalidades: nacionalidadResolver, equipos: equipoResolver, persona: personaResolver}}
   ] }
 ];
 
