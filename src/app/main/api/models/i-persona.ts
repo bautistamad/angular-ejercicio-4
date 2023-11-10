@@ -1,4 +1,5 @@
 export interface IPersona {
+    idPersona: string;
     nroPersona: number;
     nombre: string;
     apellido: string;

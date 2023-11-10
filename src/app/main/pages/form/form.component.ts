@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EquipoResourceService } from '../../api/resources/equipo-resource.service';
 import { PersonaResourceService } from '../../api/resources/persona-resource.service';
 import { IPersonadata } from '../../api/models/i-personadata';
+import { IPersona } from '../../api/models/i-persona';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -24,6 +26,7 @@ export class FormComponent {
   equipos: IEquipo[] = [];
   actividades: IHobby[] = [];
   nacionalidades: INacionalidad[] = [];
+  persona: IPersonadata[] = [];
   submitted: boolean = false;
   showInfo: boolean = false;
 
@@ -36,6 +39,7 @@ export class FormComponent {
   ngOnInit(): void {
     this.loadData();
     this.initForm();
+    this.rellenarForm();
   }
   private initForm(): void {
     this.form = this._fb.group({
@@ -49,31 +53,53 @@ export class FormComponent {
       codNacionalidad: [this.nacionalidades.find(g => g.selected)?.codigo],
       equipos: [''],
       actividades: this._fb.array([]),
-      otrasActividades: [''],
+      otrasActividades: [],
     });
   }
 
+rellenarForm(): void {
+  console.log(this.persona[0])
+  console.log(JSON.parse(this.persona[0].hobbies))
+  let arrayHobbies: number[] = JSON.parse(this.persona[0].hobbies);
+  // arrayHobbies.forEach(h => {
+  //   this.actividadesArray.push(new FormControl(Number(h)));
+  //   console.log(h);
+  // });
+
+  this.form.setValue({
+    apellido: this.persona[0].apellido,
+    nombre: this.persona[0].nombre,
+    correo: this.persona[0].correo,
+    clave: this.persona[0].clave,
+    confirmar_clave: [''],
+    codGenero: this.persona[0].codGenero,
+    fechaNacimiento: this.persona[0].fechaNacimiento,
+    codNacionalidad: [this.persona[0].codNacionalidad],
+    equipos: JSON.parse(this.persona[0].equipos),
+    actividades: JSON.parse(this.persona[0].hobbies),
+    otrasActividades: ['']
+  });
+}
+
 listarDatosResolver(): void {
-  // this._route.data.subscribe((data) => {
-  //   this.generos = data["generos"],
-  //   this.equipos = data["equipos"],
-  //   this.actividades = data["actividades"],
-  //   this.nacionalidades = data["nacionalidades"]
-  // })
 
   console.log(this._route.snapshot.params['nro_persona']);
 
   if ( this._route.snapshot.params['nro_persona'] != 0 ){
     this._route.data.subscribe((data) => {
       this.generos = data["generos"],
+      console.log(this.generos)
       this.equipos = data["equipos"],
       this.actividades = data["actividades"],
       this.nacionalidades = data["nacionalidades"]
-      console.log(data["persona"])
+      this.persona = data["persona"]
     })
-  } else{ 
+  } else{
     this._route.data.subscribe((data) => {
       this.generos = data["generos"],
+
+      console.log(this.generos)
+
       this.equipos = data["equipos"],
       this.actividades = data["actividades"],
       this.nacionalidades = data["nacionalidades"]
@@ -81,15 +107,7 @@ listarDatosResolver(): void {
   }
 }
 
-
-
   private loadData() {
-
-
-    // this.listarNacionalidades();
-    // this.listarGeneros();
-    // this.listarHobbies();
-    // this.listarEquipos();
     this.listarDatosResolver();
   }
 
@@ -114,36 +132,6 @@ listarDatosResolver(): void {
 
   get actividadesArray(): FormArray {
     return this.form.controls['actividades'] as FormArray;
-  }
-
-  private loadPersona(nroPersona: number): void {
-    // Nota que estamos pasando un objeto con la propiedad `nro_persona`
-    // this._personaService.getPersona({ nro_persona: nroPersona }).subscribe({
-    //   next: (persona: IPersonadata[]) => {
-    //     console.log(JSON.stringify(persona));
-    //     this.form.setValue({
-    //       apellido: persona[0].apellido,
-    //       nombre: persona[0].nombre,
-    //       correo: persona[0].correo,
-    //       clave: persona[0].clave, // Asumiendo que quieres mostrar la clave en el formulario
-    //       confirmar_clave: [''],
-    //       codGenero: [this.generos.find(g => g.nombre == persona[0].nomGenero)],
-    //       fechaNacimiento: persona[0].fechaNacimiento,
-    //       // codNacionalidad: [this.nacionalidades.find(g => g.codigo == persona[0].codigo)],
-    //       codNacionalidad: [""],
-    //       // equipos: [this.equipos.find(g => g.id == persona[0].equipos[0])],
-    //       equipos: [""],
-    //       // actividades: [this.actividades.find(g => g.id == persona[0].actividades[0])],
-    //       actividades: [""],
-    //       otrasActividades: ['']
-    //     });
-
-    //   },
-    //   error: (err) => {
-    //     // Aquí puedes manejar el error
-    //     console.error('Error al cargar la persona:', err);
-    //   }
-    // });
   }
 
   agregarPersona(): void {
@@ -177,4 +165,5 @@ listarDatosResolver(): void {
         this.actividadesArray.removeAt(index);
     }
   }
+  
 }
