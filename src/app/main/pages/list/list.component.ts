@@ -30,7 +30,7 @@ export class ListComponent {
     })
   }
 
-  editarPersona(nro_persona: number): void { 
+  editarPersona(nro_persona: number): void {
     // this._editService.addNumber(nro_persona);
     this.router.navigate(['/main/formulario', nro_persona]);
 

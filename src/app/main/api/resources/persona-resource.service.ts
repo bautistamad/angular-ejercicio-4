@@ -6,14 +6,13 @@ import { IPersonadata } from '../models/i-personadata';
 
 @Injectable()
 @ResourceParams({
-  pathPrefix: `${environment.apiUrl}/personas`
+  pathPrefix: `${environment.apiUrl}/api/personas`
 })
 export class PersonaResourceService extends Resource {
 
   constructor(handler?: ResourceHandler) {
     super(handler);
    }
-
    @ResourceAction({
     path: '/listado',
     method: ResourceRequestMethod.Get
