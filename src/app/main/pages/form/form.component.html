@@ -100,7 +100,7 @@
 			<div class="col-12 col-md-6 mb-3" formArrayName="actividades">
 				<label>Hobbies</label>
 				<div class="form-check" *ngFor="let h of actividades">
-					<input type="checkbox" class="form-check-input" [value]="h.id" [attr.id]="'i' + h.nombre" (change)="setHobby($event)">
+					<input type="checkbox" class="form-check-input" [value]="h.id" [attr.id]="'i' + h.nombre" (change)="setHobby($event)" [checked]="h.checked">
 					<!--  -->
 					<label class="form-check-label" [attr.for]="'i' + h.id">{{h.nombre}}</label>
 				</div>
@@ -109,7 +109,7 @@
 		<div class="row">
 			<div class="col-12 mb-3">
 				<label for="iactividades">Otras Actividades</label>
-				<textarea cols="50" rows="5" id="iactividades" formControlName="otraActividades" class="form-control"
+				<textarea cols="50" rows="5" id="iactividades" formControlName="otrasActividades" class="form-control"
 					placeholder="Mis actividades son..."></textarea>
 			</div>
 		</div>

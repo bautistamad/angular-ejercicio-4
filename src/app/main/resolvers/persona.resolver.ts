@@ -7,6 +7,6 @@ export const personasResolver: ResolveFn<IPersona[]> = (route, state) => {
   return inject(PersonaResourceService).get()
 };
 
-export const personaResolver: ResolveFn<IPersona[]> = (route, state) => {
+export const personaResolver: ResolveFn<IPersona> = (route, state) => {
   return inject(PersonaResourceService).getPersona({nro_persona: route.paramMap.get('nro_persona')!})
 };

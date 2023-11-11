@@ -26,7 +26,7 @@ export class FormComponent {
   equipos: IEquipo[] = [];
   actividades: IHobby[] = [];
   nacionalidades: INacionalidad[] = [];
-  persona: IPersonadata[] = [];
+  persona!: IPersonadata;
   submitted: boolean = false;
   showInfo: boolean = false;
 
@@ -38,8 +38,6 @@ export class FormComponent {
 
   ngOnInit(): void {
     this.loadData();
-    this.initForm();
-    this.rellenarForm();
   }
   private initForm(): void {
     this.form = this._fb.group({
@@ -53,59 +51,51 @@ export class FormComponent {
       codNacionalidad: [this.nacionalidades.find(g => g.selected)?.codigo],
       equipos: [''],
       actividades: this._fb.array([]),
-      otrasActividades: [],
+      otrasActividades: [''],
     });
   }
 
 rellenarForm(): void {
-  console.log(this.persona[0])
-  console.log(JSON.parse(this.persona[0].hobbies))
-  let arrayHobbies: number[] = JSON.parse(this.persona[0].hobbies);
-  // arrayHobbies.forEach(h => {
-  //   this.actividadesArray.push(new FormControl(Number(h)));
-  //   console.log(h);
-  // });
-
-  this.form.setValue({
-    apellido: this.persona[0].apellido,
-    nombre: this.persona[0].nombre,
-    correo: this.persona[0].correo,
-    clave: this.persona[0].clave,
-    confirmar_clave: [''],
-    codGenero: this.persona[0].codGenero,
-    fechaNacimiento: this.persona[0].fechaNacimiento,
-    codNacionalidad: [this.persona[0].codNacionalidad],
-    equipos: JSON.parse(this.persona[0].equipos),
-    actividades: JSON.parse(this.persona[0].hobbies),
-    otrasActividades: ['']
-  });
+  this.form.patchValue({apellido: this.persona.apellido});
+  this.form.patchValue({nombre: this.persona.nombre});
+  this.form.patchValue({correo: this.persona.correo});
+  this.form.patchValue({clave: this.persona.clave});
+  this.form.patchValue({codGenero: this.persona.codGenero});
+  this.form.patchValue({fechaNacimiento: this.persona.fechaNacimiento});
+  this.form.patchValue({codNacionalidad: this.persona.codNacionalidad});
+  this.form.patchValue({equipos: JSON.parse(this.persona.equipos)});
+  this.form.patchValue({otrasActividades: this.persona.otrasActividades});
+  let hobbies = JSON.parse(this.persona.hobbies);
+  if (hobbies) {
+    hobbies.forEach((hobby: number) => {
+      console.log(hobby)
+      this.actividadesArray.push(new FormControl(hobby));
+      let h = this.actividades.find(a => a.id == hobby);
+      if (h) {
+        h.checked = true;
+      }
+    });
+  }
 }
 
 listarDatosResolver(): void {
 
   console.log(this._route.snapshot.params['nro_persona']);
 
-  if ( this._route.snapshot.params['nro_persona'] != 0 ){
+  // ( this._route.snapshot.params['nro_persona'] != 0 )
     this._route.data.subscribe((data) => {
-      this.generos = data["generos"],
-      console.log(this.generos)
-      this.equipos = data["equipos"],
-      this.actividades = data["actividades"],
-      this.nacionalidades = data["nacionalidades"]
-      this.persona = data["persona"]
-    })
-  } else{
-    this._route.data.subscribe((data) => {
-      this.generos = data["generos"],
-
-      console.log(this.generos)
-
-      this.equipos = data["equipos"],
-      this.actividades = data["actividades"],
-      this.nacionalidades = data["nacionalidades"]
+      this.generos = data["generos"];
+      this.equipos = data["equipos"];
+      this.actividades = data["actividades"];
+      this.nacionalidades = data["nacionalidades"];
+      this.persona = data["persona"];
+      this.initForm();
+      if (this.persona) {
+        this.rellenarForm();
+      }
     })
   }
-}
+
 
   private loadData() {
     this.listarDatosResolver();

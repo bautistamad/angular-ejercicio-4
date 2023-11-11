@@ -17,24 +17,24 @@ export class PersonaResourceService extends Resource {
     path: '/listado',
     method: ResourceRequestMethod.Get
   })
-  get!: IResourceMethodObservable<{}, IPersona[]>;
+  get!: IResourceMethodObservable<void, IPersona[]>;
 
 
   @ResourceAction({
     path: '/datos/{!nro_persona}',
     method: ResourceRequestMethod.Get,
   })
-  getPersona!: IResourceMethodObservable<{ nro_persona?: string }, IPersonadata[]>;
+  getPersona!: IResourceMethodObservable<{ nro_persona?: string }, IPersonadata>;
 
   @ResourceAction({
     path: '/persona',
     method: ResourceRequestMethod.Post,
   })
-  post!: IResourceMethodObservable<{ persona: IPersonadata }, {}>;
+  post!: IResourceMethodObservable< IPersonadata , void>;
 
   @ResourceAction({
     path: '/{!nro_persona}',
     method: ResourceRequestMethod.Delete,
   })
-  delete!: IResourceMethodObservable<{ nro_persona?: number }, IPersona[]>;
+  delete!: IResourceMethodObservable<{ nro_persona?: number }, void>;
 }
