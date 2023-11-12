@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { FiltrarPorPipe } from './filtrar-por.pipe';
+import { FiltrarPorPipe } from './pipes/filtrar-por.pipe';
 
 
 @NgModule({
@@ -12,6 +12,9 @@ import { FiltrarPorPipe } from './filtrar-por.pipe';
   imports: [
     CommonModule,
     SharedRoutingModule
+  ],
+  exports: [
+    FiltrarPorPipe
   ]
 })
 export class SharedModule { }

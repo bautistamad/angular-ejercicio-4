@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IPersona } from '../../api/models/i-persona';
 import { PersonaResourceService } from '../../api/resources/persona-resource.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -11,12 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListComponent {
 
   personas: IPersona[] = [];
+  filtro!: FormControl;
 
   constructor( private _route: ActivatedRoute,
                 private _service: PersonaResourceService,
                 private router: Router){}
 
   ngOnInit(): void {
+    this.filtro = new FormControl('');    
     this.listarPersonasResolver();
   }
 
@@ -31,7 +34,6 @@ export class ListComponent {
     // this._editService.addNumber(nro_persona);
     this.router.navigate(['/main/formulario', id_persona]);
   }
-
 }
   
 
@@ -69,4 +71,6 @@ export class ListComponent {
   //     }
   //   })
   // }
+
+ 
 

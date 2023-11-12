@@ -10,26 +10,27 @@ import { FormComponent } from './pages/form/form.component';
 import { ListComponent } from './pages/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainRoutingModule } from './main-routing.module';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
-  declarations: [
-    MainComponent,
-    FormComponent,
-    ListComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MainRoutingModule
-  ],
-  providers: [
-    PersonaResourceService,
-    NacionalidadResourceService,
-    HobbyResourceService,
-    EquipoResourceService,
-    GeneroResourceService
-  ]
-
+    declarations: [
+        MainComponent,
+        FormComponent,
+        ListComponent
+    ],
+    providers: [
+        PersonaResourceService,
+        NacionalidadResourceService,
+        HobbyResourceService,
+        EquipoResourceService,
+        GeneroResourceService
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MainRoutingModule,
+        SharedModule
+    ]
 })
 export class MainModule { }

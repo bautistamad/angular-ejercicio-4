@@ -5,8 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FiltrarPorPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(values: any[], filters: any, filter:string): any[] {
+    let keys:any[] = !Array.isArray(filters) ? [filters] : filters;
+
+    return values.filter(item => {
+      return keys.some((keyName) => {
+        return new RegExp(filter, 'gi').test(item[keyName]);
+      });
+    });
   }
 
 }
