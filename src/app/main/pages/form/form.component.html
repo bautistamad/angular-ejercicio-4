@@ -1,5 +1,5 @@
-<app-componente-reusable>
-	<body class="container" [ngSwitch]="showInfo">
+<app-componente-reusable [titulo]="'Formulario de carga de datos'">
+	  <body class="container" [ngSwitch]="showInfo">
 		<ng-container *ngSwitchCase="false">
 		<h3>Formulario de carga de datos</h3>
 		<form [formGroup]="form" class="col-12" (ngSubmit)="agregarPersona()" invalidate>
