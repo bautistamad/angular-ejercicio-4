@@ -2,9 +2,9 @@
     <h1>Lista de Personas</h1>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Apellido: </span>
+          <span class="input-group-text" id="basic-addon1">Buscar: </span>
         </div>
-        <input type="text" class="form-control col-12" [formControl]="filtro" placeholder="Filtra por apellido" maxlength="255"> 
+        <input type="text" class="form-control col-12" [formControl]="filtro" placeholder="Filtra por apellido o nombre" maxlength="255"> 
         
     </div> 
     <table border="1" class="table">
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let persona of personas | filtrarPor:'apellido':filtro.value ;let i = index">
+            <tr *ngFor="let persona of personas | filtrarPor:['apellido','nombre']:filtro.value ;let i = index">
                 <td>{{ persona.nroPersona }}</td>
                 <td>{{ persona.apellido }}</td>
                 <td>{{ persona.nombre }}</td>
