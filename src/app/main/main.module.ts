@@ -11,12 +11,14 @@ import { ListComponent } from './pages/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from "../shared/shared.module";
+import { ComponenteReusableComponent } from './pages/componente-reusable/componente-reusable.component';
 
 @NgModule({
     declarations: [
         MainComponent,
         FormComponent,
-        ListComponent
+        ListComponent,
+        ComponenteReusableComponent
     ],
     providers: [
         PersonaResourceService,
